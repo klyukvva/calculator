@@ -20,6 +20,7 @@ function onDigitButtonClicked(digit) {
 	}	
 }
 }
+	
 // устанавка колбек-функций на кнопки циферблата по событию нажатия
 digitButtons.forEach(button => {
 	button.onclick = function() {
@@ -27,23 +28,40 @@ digitButtons.forEach(button => {
 	onDigitButtonClicked(digitValue)
 	}
 });
+
+// Функция для выполнения операций
+function calculate(operation, x, y) {
+    switch(operation) {
+        case 'x':
+            return (+x) * (+y);
+        case '+':
+            return (+x) + (+y);
+        case '-':
+            return (+x) - (+y);
+        case '/':
+            return (+y !== 0) ? (+x) / (+y) : 'ERROR'; // Проверка деления на ноль
+        default:
+            return 0;
+    }
+}
+	
 // установка колбек-функций для кнопок операций
-document.getElementById("btn_op_mult").onclick = function() {
-	if (a === '') return
-	selectedOperation = 'x'
+function setOperation(operation) {
+    if (a === '') return; // Если a пусто, не выполняем действие
+    if (selectedOperation && b !== '') { // Если операция была выбрана и b не пуст, то вычисление
+        a = calculate(selectedOperation, a, b).toString(); // Обновляем значение a
+        b = ''; // Очищаем b для следующего ввода
+        outputElement.innerHTML = a; // Обновляем вывод
+    }
+    selectedOperation = operation; // Устанавливаем новую операцию
 }
-document.getElementById("btn_op_plus").onclick = function() {
-	if (a === '') return
-	selectedOperation = '+'
-}
-document.getElementById("btn_op_minus").onclick = function() {
-	if (a === '') return
-	selectedOperation = '-'
-}
-document.getElementById("btn_op_div").onclick = function() {
-	if (a === '') return
-	selectedOperation = '/'
-}
+
+// Инициализация кнопок операций
+document.getElementById("btn_op_plus").onclick = function() { setOperation('+'); }
+document.getElementById("btn_op_minus").onclick = function() { setOperation('-'); }
+document.getElementById("btn_op_mult").onclick = function() { setOperation('x'); }
+document.getElementById("btn_op_div").onclick = function() { setOperation('/'); }
+
 // кнопка очищения
 document.getElementById("btn_op_clear").onclick = function() {
 	a = ''
@@ -120,24 +138,8 @@ document.getElementById("btn_op_backspace").onclick = function() {
 // кнопка расчѐта результата
 document.getElementById("btn_op_equal").onclick = function() {
 	if (a === '' || b === '' || !selectedOperation)
-	return
-
-	switch(selectedOperation) {
-		case 'x':
-		expressionResult = (+a) * (+b)
-		break;
-		case '+':
-		expressionResult = (+a) + (+b)
-		break;
-		case '-':
-		expressionResult = (+a) - (+b)
-		break;
-		case '/':
-		expressionResult = (+a) / (+b)
-		break;
-	}
-
-	a = expressionResult.toString()
+	return;	
+	a = calculate(selectedOperation, a, b).toString(); // Выполняем расчёт
 	b = ''
 	selectedOperation = null
 	outputElement.innerHTML = a
