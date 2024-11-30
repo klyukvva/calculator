@@ -25,8 +25,8 @@ body{
 	margin-right: 5px; /* задаем отступ от кнопки справа */
 	margin-left: 5px;
 	margin-top: 10px; /* задаем отступ от кнопки сверху*/
-	width: 50px; /* задаем ширину кнопки */
-	height: 50px; /* задаем высоту кнопки */
+	width: 70px; /* задаем ширину кнопки */
+	height: 70px; /* задаем высоту кнопки */
 	border-radius: 50%; /* округляем кнопку */
 	border: none; /* отключаем обводку */
 	background: #515151; /* задаем серый цвет кнопки */
@@ -91,8 +91,8 @@ body{
 
 /* селектор для поля вывода результата */
 .result {
-	width: 300px;
-	height: 52px;
+	width: 400px;
+	height: 72px;
 	border-radius: 15px;
 	margin-bottom: 15px; /* отступ снизу */
 	margin-left: 5px;
@@ -101,6 +101,6 @@ body{
 	background: rgb(73, 73, 73); /* цвет можно задавать и таким образом */
 	text-align: right; /* примагнитим текст к правой стороне */
 	color: #ffffff; /* цвет текста белый */
-	font-size: 1.5rem;
+	font-size: 2rem;
 	font-family: Poppins, Helvetica, sans-serif;
 }
